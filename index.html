@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hyderabad Emergency Services Dashboard</title>
+<meta name="description" content="Ward-wise emergency service desert analysis for Greater Hyderabad (GHMC).">
+<link rel="icon" href="icons/hospital.svg" type="image/svg+xml">
+<link rel="stylesheet" href="lib/ol.css">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="shell">
+
+  <!-- ===== Sidebar: Brand + Filters ===== -->
+  <aside class="side">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M12 22s-7.5-6.4-7.5-12.1A7.5 7.5 0 0 1 19.5 9.9C19.5 15.6 12 22 12 22z" fill="#f2a541"/><path d="M10.9 5.9h2.2v2.9H16v2.2h-2.9v2.9h-2.2V11H8V8.8h2.9z" fill="#13212e"/></svg>
+      </div>
+      <div>
+        <div class="brand-t">Emergency Service Deserts</div>
+        <div class="brand-s">Greater Hyderabad Municipal Corporation</div>
+      </div>
+    </div>
+
+    <div class="side-sec">
+      <div class="side-h">Filter Wards</div>
+      <p class="side-note">Every Selection Filters The Map, Numbers, Charts And Priority Wards Together.</p>
+
+      <div class="f-label">Share Of Ward Area In Service Deserts</div>
+      <div class="chips" id="clsChips">
+        <button class="chip d1 on" data-v="1">No Desert (0%)</button>
+        <button class="chip d2 on" data-v="2">Under 10%</button>
+        <button class="chip d3 on" data-v="3">10% To 25%</button>
+        <button class="chip d4 on" data-v="4">25% To 50%</button>
+        <button class="chip d5 on" data-v="5">50% And Above</button>
+      </div>
+
+      <div class="f-label">GHMC Zone</div>
+      <select id="fZone"><option value="">All Zones</option></select>
+
+      <div class="f-label">Hospital Farther Than <b id="vHosp">0 m</b></div>
+      <input type="range" id="fHosp" min="0" max="3000" step="100" value="0">
+
+      <div class="f-label">Fire Station Farther Than <b id="vFire">0 m</b></div>
+      <input type="range" id="fFire" min="0" max="8000" step="250" value="0">
+
+      <div class="f-label">Police Station Farther Than <b id="vPol">0 m</b></div>
+      <input type="range" id="fPol" min="0" max="20000" step="500" value="0">
+
+      <div class="f-label">PHC Farther Than <b id="vPhc">0 m</b></div>
+      <input type="range" id="fPhc" min="0" max="3000" step="100" value="0">
+
+      <div class="f-label">Population Density At Least <b id="vPop">0</b> Per Sq. Km</div>
+      <input type="range" id="fPop" min="0" max="30000" step="1000" value="0">
+
+      <label class="toggle"><input type="checkbox" id="fView" checked><span class="tr"></span><span>Numbers Follow Map View</span></label>
+
+      <div class="cql"><span>Active Filter (CQL Expression)</span><code id="cqlText">INCLUDE</code></div>
+      <button class="btn" id="fReset">Reset All Filters</button>
+    </div>
+  </aside>
+
+  <!-- ===== Main ===== -->
+  <div class="main">
+    <header class="topbar">
+      <div>
+        <div class="crumb">GHMC &rsaquo; Hyderabad &rsaquo; Ward-Wise Accessibility</div>
+        <h1>Mapping Emergency Service Deserts In Greater Hyderabad</h1>
+      </div>
+      <div class="top-tags">
+        <span class="tag tag-acc">155 Wards</span>
+      </div>
+    </header>
+
+    <section class="kpis" aria-label="Key Indicators">
+      <div class="kpi k1"><div class="ki">&#9638;</div><div><div class="kl">Wards In View</div><div class="kv" id="kW">&ndash;</div><div class="ks" id="kWS">Of 155 GHMC Wards</div></div></div>
+      <div class="kpi k2"><div class="ki">&#9888;</div><div><div class="kl">Desert Wards</div><div class="kv" id="kD">&ndash;</div><div class="ks" id="kDS">50% Or More Area In Deserts</div></div></div>
+      <div class="kpi k3"><div class="ki">&#9775;</div><div><div class="kl">Population In Desert Areas</div><div class="kv" id="kP">&ndash;</div><div class="ks" id="kPS">WorldPop 2025 Estimate</div></div></div>
+      <div class="kpi k4"><div class="ki">&#10010;</div><div><div class="kl">Avg. Distance To Hospital</div><div class="kv" id="kH">&ndash;</div><div class="ks" id="kHS">Population-Weighted</div></div></div>
+      <div class="kpi k5"><div class="ki">&#9650;</div><div><div class="kl">Avg. Distance To Fire Station</div><div class="kv" id="kF">&ndash;</div><div class="ks" id="kFS">Population-Weighted</div></div></div>
+      <div class="kpi k7"><div class="ki">&#9733;</div><div><div class="kl">Avg. Distance To Police Station</div><div class="kv" id="kPo">&ndash;</div><div class="ks" id="kPoS">Population-Weighted</div></div></div>
+      <div class="kpi k8"><div class="ki">&#10010;</div><div><div class="kl">Avg. Distance To PHC</div><div class="kv" id="kPh">&ndash;</div><div class="ks" id="kPhS">Population-Weighted</div></div></div>
+    </section>
+
+    <section class="content">
+      <!-- map card -->
+      <div class="card mapcard">
+        <nav class="seg" data-for="main">
+          <button class="seg-b active" data-pane="pane-map">Ward Map</button>
+          <button class="seg-b" data-pane="pane-legend">Legend &amp; Methodology</button>
+          <button class="seg-b" data-pane="pane-arch">About</button>
+        </nav>
+        <div class="panes">
+          <div class="pane active" id="pane-map">
+            <div id="map"></div>
+            <div class="mapbar">
+              <label for="themeSel">Map Theme</label>
+              <select id="themeSel"></select>
+              <label for="baseSel">Base Map</label>
+              <select id="baseSel">
+                <option value="dark">Dark Canvas (Esri)</option>
+                <option value="streets">Streets (Esri)</option>
+                <option value="gray">Light Grey (Esri)</option>
+                <option value="imagery">Satellite (Esri)</option>
+                <option value="osm">OpenStreetMap</option>
+                <option value="none">No Base Map</option>
+              </select>
+              <label for="opacity">Opacity</label>
+              <input type="range" id="opacity" min="20" max="100" value="85">
+            </div>
+            <div class="layer-box" id="layerBox">
+              <button class="lb-toggle" id="lbToggle">Map Layers</button>
+              <div class="lb-body" id="layerList"></div>
+            </div>
+            <div class="theme-legend" id="themeLegend"></div>
+            <div class="map-msg" id="mapMsg" hidden></div>
+            <div id="popup" class="ol-popup"><button id="popupClose" class="pclose" aria-label="Close">&times;</button><div id="popupContent"></div></div>
+          </div>
+
+          <div class="pane" id="pane-legend">
+            <div class="legend-wrap">
+              <div>
+                <h3>Map Legend</h3>
+                <p class="muted">Classes And Symbols Match The SLD Styles Published On GeoServer.</p>
+                <div id="legendAll"></div>
+              </div>
+              <div>
+                <h3>Methodology</h3>
+                <p class="muted">Ward Values Are Aggregated From The 1 Km Hexagon Analysis Grid Using An Area- And Population-Weighted Overlay.</p>
+                <img class="method" src="img/methodology.jpg" alt="Methodology Flowchart">
+              </div>
+            </div>
+          </div>
+
+          <div class="pane" id="pane-arch">
+            <div class="arch">
+              <h3>About This Dashboard</h3>
+              <div class="tiers">
+                <div class="tier"><div class="tn">01</div><h4>Analysis</h4><p>Emergency Accessibility Was Analysed On A 1 Km Hexagon Grid (Distance To Hospitals, Fire Stations, Police Stations And PHCs, Population, Slums, Flood Points And Transit), Clustered With K-Means To Identify Service Deserts.</p></div>
+                <div class="tier"><div class="tn">02</div><h4>Ward Aggregation</h4><p>Hexagon Values Were Aggregated To The 155 GHMC Wards Using An Area- And Population-Weighted Overlay, Giving Each Ward Its Share Of Area And Population In Service Deserts.</p></div>
+                <div class="tier"><div class="tn">03</div><h4>Web GIS</h4><p>The Layers Were Published On GeoServer (WMS, WFS, SLD Styles) And Built Into An OpenLayers Dashboard. This Public Version Is A Static Snapshot Of That Data, So It Works Without A Running Server.</p></div>
+              </div>
+              <h4 class="rq-h">Data In This Dashboard</h4>
+              <table class="req">
+                <tr><th>Layer</th><th>Features</th><th>Source</th></tr>
+                <tr><td>GHMC Wards (Hexagon-Derived Indicators)</td><td>155</td><td>Ward Boundaries, WorldPop 2025, Project Analysis</td></tr>
+                <tr><td>Hospitals / PHCs</td><td>890 / 343</td><td>Project Dataset</td></tr>
+                <tr><td>Fire Stations / Police Stations</td><td>21 / 167</td><td>Project Dataset</td></tr>
+                <tr><td>Bus Stops / Metro Stations / Railway Stations</td><td>1,820 / 53 / 42</td><td>Bus And Metro GTFS Feeds, OpenStreetMap</td></tr>
+                <tr><td>Slums / Flood Points</td><td>1,342 / 23</td><td>Project Dataset</td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- right column -->
+      <div class="rcol">
+        <div class="card prio">
+          <div class="card-h"><span>Priority Wards</span><small>Ranked By Desert Area, Then Deprivation</small></div>
+          <ol id="top10" class="toplist"><li class="muted">Loading From WFS&hellip;</li></ol>
+        </div>
+        <div class="card charts">
+          <nav class="seg small" id="chartTabs">
+            <button class="seg-b active" data-chart="desert">Desert Share</button>
+            <button class="seg-b" data-chart="dist">Distances</button>
+            <button class="seg-b" data-chart="zones">Zones</button>
+            <button class="seg-b" data-chart="depriv">Deprivation</button>
+          </nav>
+          <div class="chart-wrap"><canvas id="chart"></canvas></div>
+          <p class="chart-note" id="chartNote"></p>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script src="lib/ol.js"></script>
+<script src="lib/chart.umd.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

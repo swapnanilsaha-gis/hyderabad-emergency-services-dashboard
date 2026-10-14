@@ -1,0 +1,29 @@
+{
+"type": "FeatureCollection",
+"name": "fire_stations",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"xy_coordinate_resolution": 1e-05,
+"features": [
+{ "type": "Feature", "properties": { "name": "HAYATNAGAR", "ward": "13-HAYATHNAGAR", "circle": "3-HAYATHNAGAR", "zone": "3-HAYATHNAGAR" }, "geometry": { "type": "Point", "coordinates": [ 78.59114, 17.32825, 0.0 ] } },
+{ "type": "Feature", "properties": { "name": "MOGHALPURA", "ward": "33-MOGHALPURA", "circle": "9-CHARMINAR", "zone": "9-CHARMINAR" }, "geometry": { "type": "Point", "coordinates": [ 78.47672, 17.35957, 0.0 ] } },
+{ "type": "Feature", "properties": { "name": "MALAKPET", "ward": "27-AKBERBAGH", "circle": "6-MALAKPET", "zone": "6-MALAKPET" }, "geometry": { "type": "Point", "coordinates": [ 78.50195, 17.36843, 0.0 ] } },
+{ "type": "Feature", "properties": { "name": "HIGH COURT", "ward": "49-GANSIBAZAR", "circle": "9-CHARMINAR", "zone": "9-CHARMINAR" }, "geometry": { "type": "Point", "coordinates": [ 78.47238, 17.3698, 0.0 ] } },
+{ "type": "Feature", "properties": { "name": "SALARJUNG MUSEUM", "ward": "30-DABEERPURA", "circle": "6-MALAKPET", "zone": "6-MALAKPET" }, "geometry": { "type": "Point", "coordinates": [ 78.47984, 17.37158, 0.0 ] } },
+{ "type": "Feature", "properties": { "name": "GOWLIGUDA", "ward": "50-BEGUMBAZAR", "circle": "14-GOSHAMAHAL", "zone": "14-GOSHAMAHAL" }, "geometry": { "type": "Point", "coordinates": [ 78.47905, 17.37961, 0.0 ] } },
+{ "type": "Feature", "properties": { "name": "MUSHEERABAD", "ward": "85-ADIKMET", "circle": "15-MUSHEERABAD", "zone": "15-MUSHEERABAD" }, "geometry": { "type": "Point", "coordinates": [ 78.50074, 17.40807, 0.0 ] } },
+{ "type": "Feature", "properties": { "name": "MOULAALI", "ward": "5-MALLAPUR", "circle": "1-KAPRA", "zone": "1-KAPRA" }, "geometry": { "type": "Point", "coordinates": [ 78.55815, 17.43876, 0.0 ] } },
+{ "type": "Feature", "properties": { "name": "SECUNDERABAD", "ward": "149-BEGUMPET", "circle": "30-BEGUMPET", "zone": "30-BEGUMPET" }, "geometry": { "type": "Point", "coordinates": [ 78.48803, 17.44284, 0.0 ] } },
+{ "type": "Feature", "properties": { "name": "MALKAJGIRI", "ward": "140-MALKAJGIRI", "circle": "28-MALKAJGIRI", "zone": "28-MALKAJGIRI" }, "geometry": { "type": "Point", "coordinates": [ 78.53543, 17.45125, 0.0 ] } },
+{ "type": "Feature", "properties": { "name": "CHANDULAL BARADARI", "ward": "54-JAHANUMA", "circle": "10-FALAKNUMA", "zone": "10-FALAKNUMA" }, "geometry": { "type": "Point", "coordinates": [ 78.45923, 17.35319, 0.0 ] } },
+{ "type": "Feature", "properties": { "name": "RAJENDRA NAGAR (O/P)", "ward": "60-RAJENDRANAGAR", "circle": "11-RAJENDRANAGAR", "zone": "11-RAJENDRANAGAR" }, "geometry": { "type": "Point", "coordinates": [ 78.42528, 17.35719, 0.0 ] } },
+{ "type": "Feature", "properties": { "name": "LANGER HOUSE", "ward": "67-GOLKONDA", "circle": "13-KARWAN", "zone": "13-KARWAN" }, "geometry": { "type": "Point", "coordinates": [ 78.42212, 17.37686, 0.0 ] } },
+{ "type": "Feature", "properties": { "name": "ASSEMBLY", "ward": "78-GUNFOUNDRY", "circle": "14-GOSHAMAHAL", "zone": "14-GOSHAMAHAL" }, "geometry": { "type": "Point", "coordinates": [ 78.46789, 17.40181, 0.0 ] } },
+{ "type": "Feature", "properties": { "name": "SECRETARIAT", "ward": "78-GUNFOUNDRY", "circle": "14-GOSHAMAHAL", "zone": "14-GOSHAMAHAL" }, "geometry": { "type": "Point", "coordinates": [ 78.47129, 17.40869, 0.0 ] } },
+{ "type": "Feature", "properties": { "name": "FILM NAGAR", "ward": "95-JUBILEE HILLS", "circle": "18-JUBILEE HILLS", "zone": "18-JUBILEE HILLS" }, "geometry": { "type": "Point", "coordinates": [ 78.40891, 17.41269, 0.0 ] } },
+{ "type": "Feature", "properties": { "name": "STATE TRAINING INSTITUTE", "ward": "105-GACHIBOWLI", "circle": "20-SERILINGAMPALLY", "zone": "20-SERILINGAMPALLY" }, "geometry": { "type": "Point", "coordinates": [ 78.31018, 17.42967, 0.0 ] } },
+{ "type": "Feature", "properties": { "name": "MADHAPUR", "ward": "104-KONDAPUR", "circle": "20-SERILINGAMPALLY", "zone": "20-SERILINGAMPALLY" }, "geometry": { "type": "Point", "coordinates": [ 78.375, 17.44932, 0.0 ] } },
+{ "type": "Feature", "properties": { "name": "SANATHNAGAR", "ward": "100-SANATH NAGAR", "circle": "17-KHAIRATABAD", "zone": "17-KHAIRATABAD" }, "geometry": { "type": "Point", "coordinates": [ 78.4398, 17.4566, 0.0 ] } },
+{ "type": "Feature", "properties": { "name": "KUKATPALLY", "ward": "114-KPHB COLONY", "circle": "23-MOOSAPET", "zone": "23-MOOSAPET" }, "geometry": { "type": "Point", "coordinates": [ 78.39178, 17.49211, 0.0 ] } },
+{ "type": "Feature", "properties": { "name": "JEEDIMETLA", "ward": "130-SUBHASH NAGAR", "circle": "25-QUTUBULLAPUR", "zone": "25-QUTUBULLAPUR" }, "geometry": { "type": "Point", "coordinates": [ 78.43918, 17.52877, 0.0 ] } }
+]
+}
