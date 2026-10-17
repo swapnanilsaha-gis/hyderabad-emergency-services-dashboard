@@ -109,5 +109,5 @@ Ward boundaries and facility layers from the project dataset; population from Wo
 
 ## Author
 
-**Swapnanil Saha**, MSc Geoinformatics
-GitHub: [@swapnanilsaha-gis](https://github.com/swapnanilsaha-gis)
+**Swapnanil Saha** · Geospatial Analyst (GeoAI, Remote Sensing, Web GIS) · M.Sc. Geoinformatics, Symbiosis Institute of Geoinformatics
+Portfolio: [swapnanilsaha-gis.github.io](https://swapnanilsaha-gis.github.io) · LinkedIn: [linkedin.com/in/swapnanilsaha](https://www.linkedin.com/in/swapnanilsaha) · GitHub: [@swapnanilsaha-gis](https://github.com/swapnanilsaha-gis)
